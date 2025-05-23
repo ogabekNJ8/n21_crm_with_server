@@ -9,6 +9,12 @@ app.use(express.json());
 
 app.use("/api", indexRouter)
 
+app.use((req, res, next) => {
+  res.status(404).json({
+    message: "Route not found",
+  });
+});
+
 async function start() {
   try {
     app.listen(PORT, () => {

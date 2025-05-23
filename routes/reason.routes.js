@@ -10,7 +10,7 @@ const {
 router.post("/", addReason);
 router.get("/", getAllReasons);
 router.get("/:id", getReason);
-router.put("/:id", updateReason);
+router.patch("/:id", updateReason);
 router.delete("/:id", deleteReason);
 
 module.exports = router;
