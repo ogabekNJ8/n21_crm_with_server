@@ -17,7 +17,7 @@ app.use((req, res, next) => {
 
 async function start() {
   try {
-    app.listen(PORT, () => {
+    app.listen(PORT, '0.0.0.0', () => {
       console.log(`Server started at: http://localhost${PORT}`);
     });
   } catch (error) {
