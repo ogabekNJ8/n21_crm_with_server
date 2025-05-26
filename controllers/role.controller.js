@@ -7,7 +7,7 @@ const addRole = async (req, res) => {
 
     const newRole = await pool.query(
       `
-      INSERT INTO roles (name)
+      INSERT INTO role (name)
       VALUES ($1) RETURNING *
       `,
       [name]
@@ -23,8 +23,8 @@ const addRole = async (req, res) => {
 
 const getAllRoles = async (req, res) => {
   try {
-    const roles = await pool.query(`SELECT * FROM roles ORDER BY id`);
-    res.status(200).send(roles.rows);
+    const role = await pool.query(`SELECT * FROM role ORDER BY id`);
+    res.status(200).send(role.rows);
   } catch (error) {
     sendErrorresponse(error, res);
   }
@@ -33,7 +33,7 @@ const getAllRoles = async (req, res) => {
 const getRole = async (req, res) => {
   try {
     const { id } = req.params;
-    const role = await pool.query(`SELECT * FROM roles WHERE id = $1`, [id]);
+    const role = await pool.query(`SELECT * FROM role WHERE id = $1`, [id]);
 
     if (!role.rowCount)
       return res.status(404).send({ message: "Role not found" });
@@ -50,7 +50,7 @@ const updateRole = async (req, res) => {
     const { name } = req.body;
 
     const updatedRole = await pool.query(
-      `UPDATE roles SET name = $1 WHERE id = $2 RETURNING *`,
+      `UPDATE role SET name = $1 WHERE id = $2 RETURNING *`,
       [name, id]
     );
 
@@ -72,7 +72,7 @@ const deleteRole = async (req, res) => {
     const { id } = req.params;
 
     const role = await pool.query(
-      "DELETE FROM roles WHERE id = $1 RETURNING *",
+      "DELETE FROM role WHERE id = $1 RETURNING *",
       [id]
     );
 
